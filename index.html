@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 120px;
+  height: 120px;
+  margin: -76px 0 0 -76px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+#myDiv1 {
+  text-align: center;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* Style the buttons */
+.btn {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+.btn.active {
+  background-color: #666;
+  color: white;
+}
+
+.dropdown{
+	float:right;
+}
+</style>
+</head>
+<body onload="myFunction()" style="margin:0;">
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+
+<h2>Users</h2>
+
+<br>
+<div class="dropdown">
+<label>sort by:</label><select name="sortby" id="sortby">
+	<option value="None">None</option>
+    <option value="FirstName">Firstname</option>
+    <option value="LastName">LastName</option>
+</select>
+</div>
+
+<br>
+<br>
+  
+<div class="row">
+  <div id=1 class="column" style="background-color:#aaa;" onclick=one()>
+      
+    <button class="btn">
+    <img src="https://reqres.in/img/faces/1-image.jpg">
+    <p>George Bluth</p>
+      </button>
+  </div>
+  <div id=2 class="column" style="background-color:#bbb;" onclick=two()>
+    <button class="btn">
+    <img src="https://reqres.in/img/faces/2-image.jpg">
+    <p>Janet Weaver</p>
+    </button>
+  </div>
+  <div id=3 class="column" style="background-color:#ccc;" onclick=three()>
+    <button class="btn">
+    <img src="https://reqres.in/img/faces/3-image.jpg">
+    <p>Emma wong</p>
+    </button>
+  </div>
+</div>
+
+<div class="row">
+
+  <div id=4 class="column" style="background-color:#ddd;" onclick=four()>
+    <button class="btn">
+    <img src="https://reqres.in/img/faces/4-image.jpg">
+    <p>Eve holt</p>
+    </button>
+  </div>
+  <div id=5 class="column" style="background-color:#ccc;" onclick=five()>
+    <button class="btn">
+    <img src="https://reqres.in/img/faces/5-image.jpg">
+    <p>Charles Morris</p>
+    </button>
+  </div>
+  <div id=6 class="column" style="background-color:#ddd;" onclick=six()>
+    <button class="btn">
+    <img src="https://reqres.in/img/faces/6-image.jpg">
+    <p>Tracey Ramos</p>
+    </button>
+  </div>
+</div>
+
+</div>
+<div id="myDiv1"></div>
+
+<script>
+
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 2000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+
+
+
+const users= [{firstName: "George",lastName: "Bluth",id:1,email:"george.bluth@reqres.in"},{firstName: "Janet",lastName: "Weaver",id:2,email:"janet.weaver@reqres.in"},{firstName: "Emma",lastName: "Wong",id:3,email:"emma.wong@reqres.in"},{firstName: "Eve",lastName: "holt",id:4,email:"eve.holt@reqres.in"},{firstName: "Charles",lastName: "Morris",id:5,email:"harles.morris@reqres.in"},{firstName: "Tracey",lastName: "Ramos",id:6,email:"tracey.ramos@reqres.in"}];
+
+user_first_names=[users[0].firstName,users[1].firstName,users[2].firstName,users[3].firstName,users[4].firstName,users[5].firstName];
+
+user_first_names1=[users[0].firstName,users[1].firstName,users[2].firstName,users[3].firstName,users[4].firstName,users[5].firstName];
+
+user_last_names=[users[0].lastName,users[1].lastName,users[2].lastName,users[3].lastName,users[4].lastName,users[5].lastName];
+
+first_names_mapping={George:"Bluth",Janet:"Weaver",Emma:"Wong",Eve:"holt",Charles:"Morris",Tracey:"Ramos"};
+
+last_names_mapping={Bluth:"George",Weaver:"Janet",Wong:"Emma",holt:"Eve",Morris:"Charles",Ramos:"Tracey"};
+
+first_names_img={George:"https://reqres.in/img/faces/1-image.jpg",
+Janet:"https://reqres.in/img/faces/2-image.jpg",
+Emma:"https://reqres.in/img/faces/3-image.jpg",
+Eve:"https://reqres.in/img/faces/4-image.jpg",
+Charles:"https://reqres.in/img/faces/5-image.jpg",
+Tracey:"https://reqres.in/img/faces/6-image.jpg"};
+
+function FirstName(){
+	document.getElementById("myDiv").style.display = "block";
+    document.getElementById("myDiv1").style.display = "none";
+	user_first_names.sort();
+    for(let i=0;i <user_first_names.length; i++){
+		document.getElementById(i+1).innerHTML="<button class='btn'><img src="+first_names_img[user_first_names[i]]+"><p>"+user_first_names[i]+" "+first_names_mapping[user_first_names[i]]+"</p></button>";
+    }
+
+}
+
+function LastName(){
+	document.getElementById("myDiv").style.display = "block";
+    document.getElementById("myDiv1").style.display = "none";
+	user_last_names.sort();
+    for(let i=0;i <user_first_names.length; i++){
+		document.getElementById(i+1).innerHTML="<button class='btn'><img src="+first_names_img[last_names_mapping[user_last_names[i]]]+"><p>"+last_names_mapping[user_last_names[i]]+" "+user_last_names[i]+"</p></button>";
+    }
+
+}
+function None(){
+	document.getElementById("myDiv").style.display = "block";
+    document.getElementById("myDiv1").style.display = "none";
+    for(let i=0;i <user_first_names1.length; i++){
+		document.getElementById(i+1).innerHTML="<button class='btn'><img src="+first_names_img[user_first_names1[i]]+"><p>"+user_first_names1[i]+" "+first_names_mapping[user_first_names1[i]]+"</p></button>";
+    }
+
+}
+var sortby=document.getElementById("sortby");
+var flag=2;
+
+sortby.onchange = function(){ 
+	if (sortby.value == "FirstName") { 
+		FirstName();
+        flag=0;
+	} 
+	else{
+    if (sortby.value == "LastName") {
+		LastName(); 
+        flag=1;
+	}
+    else{
+   		None(); 
+        flag=2;
+    }
+   }
+}
+function one(){
+	document.getElementById("myDiv").style.display = "none";
+	document.getElementById("myDiv1").style.display = "block";
+    
+	var id;
+    var email;
+    var fname;
+    var lname;
+    
+    //document.getElementById("myDiv").innerHTML=users[0].email;
+    if (flag==0){
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names[0]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names[0]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}  
+else if (flag==1){
+for(let i=0;i <users.length; i++){
+    	if (users[i].lastName == user_last_names[0]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[last_names_mapping[user_last_names[0]]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+else{
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names1[0]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names1[0]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+
+}
+
+}
+function two(){
+
+	document.getElementById("myDiv").style.display = "none";
+	document.getElementById("myDiv1").style.display = "block";
+	var id;
+    var email;
+    var fname;
+    var lname;
+    
+    //document.getElementById("myDiv").innerHTML=users[0].email;
+    if (flag==0){
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names[1]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names[1]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}  
+else if (flag==1){
+for(let i=0;i <users.length; i++){
+    	if (users[i].lastName == user_last_names[1]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[last_names_mapping[user_last_names[1]]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+else{
+
+for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names1[1]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names1[1]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+
+}
+
+function three(){
+	document.getElementById("myDiv").style.display = "none";
+	document.getElementById("myDiv1").style.display = "block";
+	var id;
+    var email;
+    var fname;
+    var lname;
+    
+    //document.getElementById("myDiv").innerHTML=users[0].email;
+    if (flag==0){
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names[2]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names[2]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}  
+else if (flag==1){
+for(let i=0;i <users.length; i++){
+    	if (users[i].lastName == user_last_names[2]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[last_names_mapping[user_last_names[2]]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+else{
+for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names1[2]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names1[2]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+
+}
+function four(){
+	document.getElementById("myDiv").style.display = "none";
+	document.getElementById("myDiv1").style.display = "block";
+	var id;
+    var email;
+    var fname;
+    var lname;
+    
+    //document.getElementById("myDiv").innerHTML=users[0].email;
+    if (flag==0){
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names[3]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names[3]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}  
+else if (flag==1){
+for(let i=0;i <users.length; i++){
+    	if (users[i].lastName == user_last_names[3]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[last_names_mapping[user_last_names[3]]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+else{
+for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names1[3]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names1[3]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+}
+
+}
+function five(){
+	document.getElementById("myDiv").style.display = "none";
+	document.getElementById("myDiv1").style.display = "block";
+	var id;
+    var email;
+    var fname;
+    var lname;
+    
+    //document.getElementById("myDiv").innerHTML=users[0].email;
+    if (flag==0){
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names[4]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names[4]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}  
+else if (flag==1){
+for(let i=0;i <users.length; i++){
+    	if (users[i].lastName == user_last_names[4]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[last_names_mapping[user_last_names[4]]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+else{
+for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names1[4]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names1[4]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+
+}
+function six(){
+	document.getElementById("myDiv").style.display = "none";
+	document.getElementById("myDiv1").style.display = "block";
+	var id;
+    var email;
+    var fname;
+    var lname;
+    
+    //document.getElementById("myDiv").innerHTML=users[0].email;
+    if (flag==0){
+	for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names[5]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names[5]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}  
+else if (flag==1){
+for(let i=0;i <users.length; i++){
+    	if (users[i].lastName == user_last_names[5]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[last_names_mapping[user_last_names[5]]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+else{
+
+for(let i=0;i <users.length; i++){
+    	if (users[i].firstName == user_first_names1[5]){
+        	id=users[i].id;
+            email=users[i].email;
+            fname=users[i].firstName;
+            lname=users[i].lastName;
+            }
+    		
+    }
+	document.getElementById("myDiv1").innerHTML ="<h1>"+fname+" "+lname+"</h1><br><br>"
+    +"<img src="+first_names_img[user_first_names1[5]]+"><br><br><h3>id: "+id+"</h3><br><h3>Email: "+email+"</h3><br><h3>First Name: "+fname+"</h3><br><h3>Last Name: "+lname+"</h3></br>"+"<button type='button' class='btn' onclick=back()>back</button>"
+
+}
+
+}
+
+function back(){
+	document.getElementById("myDiv1").style.display = "None";
+	document.getElementById("myDiv").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
